@@ -1,9 +1,4 @@
-<?php 
-include ("session.php");
-?>
 <head>
-<h1>Welcome <?php $login_session?></h1>
-<h2><a href="logout.php">Logout </a></h2>
 <script>
 function clic(element){
 
@@ -23,7 +18,7 @@ function clic(element){
 <script>
 function myFunction(){
     let value = document.getElementById("search-input").value;
-    console.log(value);
+    let phpValue = "<?php echo $phpvalue = $value; ?>";
 }
 </script>
 
@@ -61,11 +56,11 @@ require ("config.php");
                     $myObj = NULL;
 
 
-                    function getList($db, $what, $myObj) {
+                    function getList($conn, $what, $myObj) {
                         $count = 0;
                         $sql = "SELECT". $what . "FROM unifi_mac";
-                        $result = mysqli_query($db, $sql);
-                        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                        $result = mysqli_query($conn, $sql);
+                        while ($row = mysqli_fetch_assoc($result)){
                             foreach($row as $device){
                                 $myObj[$count][$what] = $device;
                                 $count ++;
@@ -75,7 +70,7 @@ require ("config.php");
 
                     $what = "mac";
 
-                    $myObj = getList($db, $what, $myObj);
+                    $myObj = getList($conn, $what);
 
                     foreach($myObj as $obj){
                         echo $obj;
@@ -216,6 +211,6 @@ require ("config.php");
               <script src="js/form.js"></script>
             </div>
         </div>
--->
+--
 </body>
 </html>

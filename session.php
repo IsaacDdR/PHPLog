@@ -1,10 +1,15 @@
-<?php 
-    include('config.php');
+<?php
+
+
     session_start();
 
+    require("config.php");
+
     $user_check = $_SESSION['login_user'];
-    $ses_sql = mysqli_query($db, "SELECT username FROM admin WHERE username = '$usercheck'");
-    $row = mysqli_fetch_array($sess_sql, MYSQLI_ASSOC);
+
+    $ses_sql = mysqli_query($db, "SELECT username FROM admin WHERE username = '$user_check'");
+
+    $row = mysqli_fetch_array($ses_sql, MYSQLI_ASSOC);
 
     $login_session = $row['username'];
 
@@ -12,4 +17,5 @@
         header("location: login.php");
         die();
     }
+
 ?>
